@@ -1,0 +1,26 @@
+{
+  "name": "api-jogo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "connection.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js",    
+    "test": "mocha ./src/tests/test.js"
+  },
+  "mocha":{
+    "watch" : true,
+    "reporter" : "nyan"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.6",
+    "express": "^4.18.1",
+    "mocha": "^10.0.0",
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.3.2",
+    "nodemon": "^2.0.16"
+  }
+}
