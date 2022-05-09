@@ -1,6 +1,6 @@
 import jogadores from "../models/jogadorModel.js"
 
-export const read = async function readJogador(req, res){
+export const readJogador = async function readJogador(req, res){
 
     const jogadoresResponse = await jogadores.find()
     const jogadoresResponseC = JSON.parse(JSON.stringify(jogadoresResponse))
@@ -16,7 +16,7 @@ export const read = async function readJogador(req, res){
     res.json(jogadoresResponseC)
 }
 
-export const create = async function cadastrarJogador(req, res){
+export const createJogador = async function cadastrarJogador(req, res){
     let jogador = new jogadores(req.body);
     jogador.save((err) => {
         if(err){
@@ -28,7 +28,7 @@ export const create = async function cadastrarJogador(req, res){
     })
 }
 
-export const update = (req, res) => {
+export const updateJogador = (req, res) => {
     let id = req.params.id;
 
     jogadores.findByIdAndUpdate(id, {$set: req.body}, (err) => {
@@ -41,7 +41,7 @@ export const update = (req, res) => {
     })
 }
 
-export const deletar = (req, res) => {
+export const deletarJogador = (req, res) => {
     let id = req.params.id;
 
         jogadores.findByIdAndDelete(id, (err) => {
