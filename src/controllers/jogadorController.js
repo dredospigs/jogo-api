@@ -3,8 +3,8 @@ import jogadores from "../models/jogadorModel.js"
 export const readJogador = async function readJogador(req, res){
 
     const jogadoresResponse = await jogadores.find()
-    const jogadoresResponseC = JSON.parse(JSON.stringify(jogadoresResponse))
-    jogadoresResponseC.forEach(jogador => {
+    const jogadoresResponseCloned = JSON.parse(JSON.stringify(jogadoresResponse))
+    jogadoresResponseCloned.forEach(jogador => {
         const moedas = jogador.coins;
         let medalhas = parseInt(moedas / 10)
         let trofeus = parseInt(medalhas / 3)
@@ -13,7 +13,7 @@ export const readJogador = async function readJogador(req, res){
         jogador.trophies = trofeus
     })
 
-    res.json(jogadoresResponseC)
+    res.json(jogadoresResponseCloned)
 }
 
 export const createJogador = async function cadastrarJogador(req, res){
