@@ -23,6 +23,8 @@ Desafio que foi proposto como avaliação para os estagiários
 - ``Javascript``
 - ``TDD``
 - ``conhecimento de Git``
+- ``Insomnia``
+- ``Postman``
 
 
 :hamster:
