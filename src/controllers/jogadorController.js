@@ -1,22 +1,26 @@
-import { jogadorFind, jogadorCreate, jogadorDelete, jogadorUpdate } from "../repositories/jogadorRepository.js";
+import { atualizarJogador, deleteJogador, lerJogador, criarJogador} from "../services/jogadorService.js";
 
 export const readJogador = async function readJogador(req, res){
 
-    const jogadoresResponse = await jogadorFind();
-    const jogadoresResponseCloned = JSON.parse(JSON.stringify(jogadoresResponse));
-    jogadoresResponseCloned.forEach(jogador => {
-        const moedas = jogador.coins;
-        let medalhas = parseInt(moedas / 10);
-        let trofeus = parseInt(medalhas / 3);
+    const jogadorResponse = await lerJogador();
 
-        jogador.medals = medalhas;
-        jogador.trophies = trofeus;
-    })
-    res.status(200).json(jogadoresResponseCloned);
+    res.status(200).json(jogadorResponse);
+    
+    /*/ const jogadoresResponse = await jogadorFind();
+    // const jogadoresResponseCloned = JSON.parse(JSON.stringify(jogadoresResponse));
+    // jogadoresResponseCloned.forEach(jogador => {
+    //     const moedas = jogador.coins;
+    //     let medalhas = parseInt(moedas / 10);
+    //     let trofeus = parseInt(medalhas / 3);
+
+    //     jogador.medals = medalhas;
+    //     jogador.trophies = trofeus;
+    // })
+    // res.status(200).json(jogadoresResponseCloned);*/
 }
 
 export const createJogador = async function cadastrarJogador(req, res){
-    let jogador = await jogadorCreate(req.body);
+    let jogador = await criarJogador(req.body);
     jogador.save((err) => {
         if(err){
             res.send(`Houve um erro na criação do jogador! Erro:${err.message}`);
@@ -31,7 +35,7 @@ export const updateJogador = (req, res) => {
     const id = req.params.id;
 
     try {
-        jogadorUpdate(id, req.body)
+        atualizarJogador(id, req.body);
         res.status(201).send('A atualização foi feita com sucesso!');
     } catch (error) {
         res.send(`Houve um erro na hora de atualizar o jogador! Erro: ${error}`);
@@ -42,7 +46,7 @@ export const deletarJogador = (req, res) => {
     const id = req.params.id;
 
     try {
-        jogadorDelete(id);
+        deleteJogador(id);
         res.status(201).send('O jogador foi deletado com sucesso!');
     } catch (error) {
         res.send(`Houve um erro na hora de deletar o jogador! Erro: ${error}`);

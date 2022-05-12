@@ -1,7 +1,7 @@
 import jogadores from "../models/jogadorModel.js"
 
 export const jogadorFind = async () => {
-    return jogadores.find()
+    return jogadores.find().lean()
 }
 
 export const jogadorDelete = async (id) => {
