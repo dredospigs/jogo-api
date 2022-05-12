@@ -1,8 +1,8 @@
-import jogadores from "../models/jogadorModel.js"
+import { jogadorFind, jogadorCreate, jogadorDelete, jogadorUpdate } from "../repositories/jogadorRepository.js";
 
 export const readJogador = async function readJogador(req, res){
 
-    const jogadoresResponse = await jogadores.find();
+    const jogadoresResponse = await jogadorFind();
     const jogadoresResponseCloned = JSON.parse(JSON.stringify(jogadoresResponse));
     jogadoresResponseCloned.forEach(jogador => {
         const moedas = jogador.coins;
@@ -16,7 +16,7 @@ export const readJogador = async function readJogador(req, res){
 }
 
 export const createJogador = async function cadastrarJogador(req, res){
-    let jogador = new jogadores(req.body);
+    let jogador = await jogadorCreate(req.body);
     jogador.save((err) => {
         if(err){
             res.send(`Houve um erro na criação do jogador! Erro:${err.message}`);
@@ -28,27 +28,23 @@ export const createJogador = async function cadastrarJogador(req, res){
 }
 
 export const updateJogador = (req, res) => {
-    let id = req.params.id;
+    const id = req.params.id;
 
-    jogadores.findByIdAndUpdate(id, {$set: req.body}, (err) => {
-        if(err){
-            res.send(`Houve um erro na hora de atualizar o jogador! Erro: ${err.message}`);
-        }
-        else{
-            res.status(201).send('A atualização foi feita com sucesso!');
-        }
-    })
+    try {
+        jogadorUpdate(id, req.body)
+        res.status(201).send('A atualização foi feita com sucesso!');
+    } catch (error) {
+        res.send(`Houve um erro na hora de atualizar o jogador! Erro: ${error}`);
+    }
 }
 
 export const deletarJogador = (req, res) => {
-    let id = req.params.id;
+    const id = req.params.id;
 
-        jogadores.findByIdAndDelete(id, (err) => {
-            if(err){
-                res.send(`Houve um erro na hora de deletar o jogador! Erro: ${err.message}`);
-            }
-            else{
-                res.status(201).send('O jogador foi deletado com sucesso!');
-            }
-        })
+    try {
+        jogadorDelete(id);
+        res.status(201).send('O jogador foi deletado com sucesso!');
+    } catch (error) {
+        res.send(`Houve um erro na hora de deletar o jogador! Erro: ${error}`);
+    }
 }

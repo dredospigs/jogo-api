@@ -6,7 +6,7 @@ chai.should();
 var chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
-describe('Testes das rotas', () => {
+describe.skip('Testes das rotas', () => {
   
   it('Get básico', () =>{
     chai.request('http://localhost:3000')
