@@ -1,17 +1,24 @@
 import jogadores from "../models/jogadorModel.js"
 
-export const jogadorFind = async () => {
+const jogadorFind = async () => {
     return jogadores.find().lean()
 }
 
-export const jogadorDelete = async (id) => {
+const jogadorDelete = async (id) => {
     return jogadores.findByIdAndDelete(id)
 }
 
-export const jogadorUpdate = async (id, content) => {
+const jogadorUpdate = async (id, content) => {
     return jogadores.findByIdAndUpdate(id, {$set: content})
 }
 
-export const jogadorCreate = async (body) => {
+const jogadorCreate = async (body) => {
     return new jogadores(body)
+}
+
+export default {
+    jogadorFind,
+    jogadorDelete,
+    jogadorUpdate,
+    jogadorCreate
 }
