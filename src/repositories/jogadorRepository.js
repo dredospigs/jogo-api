@@ -1,4 +1,4 @@
-import jogadores from "../models/jogadorModel.js"
+const jogadores = require("../models/jogadorModel.js")
 
 const jogadorFind = async () => {
     return jogadores.find().lean()
@@ -16,7 +16,7 @@ const jogadorCreate = async (body) => {
     return new jogadores(body)
 }
 
-export default {
+module.exports = {
     jogadorFind,
     jogadorDelete,
     jogadorUpdate,

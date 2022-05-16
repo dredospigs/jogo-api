@@ -1,6 +1,6 @@
-import { atualizarJogador, deleteJogador, lerJogador, criarJogador} from "../services/jogadorService.js";
+const { atualizarJogador, deleteJogador, lerJogador, criarJogador} = require("../services/jogadorService.js")
 
-export const readJogador = async function readJogador(req, res){
+const readJogador = async function readJogador(req, res){
 
     const jogadorResponse = await lerJogador();
 
@@ -19,7 +19,7 @@ export const readJogador = async function readJogador(req, res){
     // res.status(200).json(jogadoresResponseCloned);*/
 }
 
-export const createJogador = async function cadastrarJogador(req, res){
+const createJogador = async function cadastrarJogador(req, res){
     let jogador = await criarJogador(req.body);
     jogador.save((err) => {
         if(err){
@@ -31,7 +31,7 @@ export const createJogador = async function cadastrarJogador(req, res){
     })
 }
 
-export const updateJogador = (req, res) => {
+const updateJogador = (req, res) => {
     const id = req.params.id;
 
     try {
@@ -42,7 +42,7 @@ export const updateJogador = (req, res) => {
     }
 }
 
-export const deletarJogador = (req, res) => {
+const deletarJogador = (req, res) => {
     const id = req.params.id;
 
     try {
@@ -52,3 +52,11 @@ export const deletarJogador = (req, res) => {
         res.send(`Houve um erro na hora de deletar o jogador! Erro: ${error}`);
     }
 }
+
+module.exports = {
+    atualizarJogador,
+    readJogador,
+    createJogador,
+    updateJogador,
+    deletarJogador
+} 

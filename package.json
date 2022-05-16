@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "connection.js",
-  "type": "module",
   "scripts": {
     "start": "nodemon index.js",
     "test": "mocha ./src/tests/tests.spec.js"

@@ -1,4 +1,10 @@
-import repository from '../repositories/jogadorRepository.js'
+const repository = require('../repositories/jogadorRepository.js')
+const services = require('../services/jogadorService')
+
+var chai = require('chai')
+ 
+const expect = chai.expect
+sinon = require('sinon'); 
 // import chai from "chai"
 // import sinon from "sinon"
 // import chaiHttp from "chai-http"
@@ -73,28 +79,26 @@ import repository from '../repositories/jogadorRepository.js'
 //   });
 // });*/
 
-// console.log(chai)
-// console.log(mocha)
 
 describe('Jogador teste services e repositories', async () => {
   const sandbox = sinon.createSandbox({});
 
-  //var repository = await import('../repositories/jogadorRepository.js')
-  //var services = await import('../services/jogadorService.js');
+  console.log('sandbox')
 
   afterEach(() => {
     sandbox.restore();
   })
 
-  it('should return an empty array if the I dont have any data saved on database', () =>{
+  it('should return an empty array if the I dont have any data saved on database', async () =>{
     //ARRANGE
     sandbox.stub(repository, "jogadorFind").resolves([]);
 
     //ACT
-    const response = services.lerJogador();
+    const response = await services.lerJogador();
 
     //ASSERT
-    expect(response).to.be.equal([]);
+    console.log('response', response) 
+    expect(response).to.be.deep.equal([]);
   })
 
 })

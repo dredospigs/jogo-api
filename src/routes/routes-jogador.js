@@ -1,5 +1,5 @@
-import express from "express"
-import { readJogador, createJogador, updateJogador, deletarJogador } from "../controllers/jogadorController.js"
+const express = require("express") 
+const { readJogador, createJogador, updateJogador, deletarJogador } = require("../controllers/jogadorController.js")
 
 const router = express.Router()
 
@@ -9,4 +9,4 @@ router
     .put("/jogadores/:id", updateJogador)
     .delete("/jogadores/:id", deletarJogador)
 
-export default router
+module.exports = router 

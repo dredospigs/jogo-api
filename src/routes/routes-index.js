@@ -1,5 +1,4 @@
-import express from "express";
-import userRoutes from "./routes-jogador.js";
+const userRoutes = require("./routes-jogador.js")
 
 const routes = (app) => {
     app.route('/').get((req, res) => {
@@ -11,4 +10,4 @@ const routes = (app) => {
         );
 };
 
-export default routes
+module.exports = routes 

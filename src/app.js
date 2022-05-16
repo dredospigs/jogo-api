@@ -1,7 +1,7 @@
-import express from "express";
-import db from "./dbConfig.js";
-import jogadores from "./models/jogadorModel.js"
-import routes from "./routes/routes-index.js"
+const express = require("express")
+const db = require("./dbConfig.js")
+const jogadores = require("./models/jogadorModel.js")
+const routes = require("./routes/routes-index.js")
 
 db.on("error", console.log.bind(console, 'Houve algum erro na hora de se conectar ao banco!'));
 db.once("open", () => {
@@ -13,4 +13,4 @@ app.use(express.json())
 
 routes(app)
 
-export default app
+module.exports = app 

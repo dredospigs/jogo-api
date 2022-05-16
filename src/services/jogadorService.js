@@ -1,23 +1,23 @@
-import { jogadorFind, jogadorCreate, jogadorDelete, jogadorUpdate } from "../repositories/jogadorRepository.js";
+const repository = require("../repositories/jogadorRepository.js")
 
-export const lerJogador = async () => {
+const lerJogador = async () => {
 
-    const jogadoresResponse = await jogadorFind();
+    const jogadoresResponse = await repository.jogadorFind();
     const resposta = jogadoresResponse.map(calculateMedalsAndTrophies);
 
     return resposta;
 }
 
-export const deleteJogador = async (id) => {
-    return jogadorDelete(id)
+const deleteJogador = async (id) => {
+    return repository.jogadorDelete(id)
 }
 
-export const atualizarJogador = async (id, content) => {
-    return jogadorUpdate(id, content);
+const atualizarJogador = async (id, content) => {
+    return repository.jogadorUpdate(id, content);
 }
 
-export const criarJogador = async(body) => {
-    return jogadorCreate(body);
+const criarJogador = async(body) => {
+    return repository.jogadorCreate(body);
 }
 
 //funções de regras de negócios
@@ -31,3 +31,10 @@ const calculateMedalsAndTrophies = (jogador) => {
       trophies
     }
 }
+
+module.exports = {
+    lerJogador,
+    deleteJogador,
+    atualizarJogador,
+    criarJogador
+} 
