@@ -6,64 +6,6 @@ var chai = require('chai')
 const expect = chai.expect
 sinon = require('sinon'); 
 
-/*var chaiHttp = require('chai-http')
-chai.use(chaiHttp)
-describe.skip('Testes das rotas', () => {
-  
-  it('Get básico', () =>{
-    chai.request('http://localhost:3000')
-      .get('/')
-      .end(function(err, res) {
-        expect(res).to.have.status(202);   
-      });
-  });
-
-
-  it('Get jogadores - status', () =>{
-    chai.request('http://localhost:3000')
-      .get('/jogadores')
-      .end(function(err, res) {
-        expect(res).to.have.status(201);   
-      });
-  });
-
-
-  it.skip('Post jogadores - status', () =>{
-    chai.request('http://localhost:3000')
-      .post('/jogadores')
-      .send({
-        "name" : "Roger",
-      	"coins" : 100
-      })
-      .end((err, res) => {
-        chai.expect(res).to.have.status(201); 
-      });
-  });
-
-
-  it('Put jogadores - status', () =>{
-
-    chai.request('http://localhost:3000')
-      .put('/jogadores/628414e908b7922aab930001')
-      .send({
-      	"coins" : 400
-      })
-      .end((err, res) => {
-        chai.expect(res).to.have.status(201); 
-      });
-  });
-  
-
-  it.skip('Delete jogadores - status', () =>{
-
-    chai.request('http://localhost:3000')
-      .delete('/jogadores/')
-      .end((err, res) => {
-        chai.expect(res).to.have.status(201); 
-      });
-  });
-});*/
-
 
 describe('Jogador teste services e repositories', async () => {
   const sandbox = sinon.createSandbox({});
@@ -131,7 +73,22 @@ describe('Jogador teste services e repositories', async () => {
     const response = await services.lerJogador();
 
     //ASSERT
-    expect(response.length).to.be.equal(2)
+    expect(response).to.be.deep.equal([
+      {
+        _id: '1',
+        name: 'Bruno',
+        coins: 60,
+        medals: 6,
+        trophies: 2
+      },
+      {
+        _id: '2',
+        name: 'Renan',
+        coins: 35,
+        medals: 3,
+        trophies: 1
+      }
+    ])
   })
 
 
